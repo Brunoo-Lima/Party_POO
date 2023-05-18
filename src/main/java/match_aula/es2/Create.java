@@ -1,82 +1,82 @@
 package match_aula.es2;
+
 import java.util.Scanner;
+
 public class Create {
-    Question question = new Question();
+
     Party party = new Party();
-    Participants participants = new Participants();
     Scanner response = new Scanner(System.in);
 
-    public void Assign_questions() {
+    public void Assign_party() {
+        System.out.print("Digite o nome da festa: ");
+        party.setNameParty(response.nextLine());
+
+        System.out.print("Digite a descrição da festa: ");
+        party.setDescription(response.nextLine());
+
+        System.out.println("Crie perguntas de SIM/NAO para os participantes acharem " +
+                "o seu MATCH! ");
+
         int numPerguntas = 0;
-
-        //Cadastrar Perguntas
-
         do {
             System.out.print("Digite Pergunta ou 0 (Sair): ");
-            question.setText(response.nextLine());
+            String textAnswer = response.nextLine();
 
-            if(question.getText().equals("0")) {
-                break;
-            }
+            if (textAnswer.equals("0")) break;
+
+
+            Question question = new Question();
+            question.setText(textAnswer);
 
             party.addQuestion(question);
             numPerguntas++;
-        }while(true);
+        } while (true);
     }
 
     public void Assign_participants() {
-        int numParticipants = 0;
-
         System.out.println("\n--- Cadastrar Participantes ---");
-
+        int numParticipants=0;
         do {
             System.out.println("Digite o nome do participante ou 0 (Sair): ");
-            participants.setName(response.next());
+            String respParticipants = response.next();
 
-            if(participants.getName().equals("0")) {
-                break;
-            }
+            if(respParticipants.equals("0")) break;
 
-            for (Question question: party.getQuestions()) {
-                System.out.println("Resposta para a pergunta '" + (question.getText()) + "': ");
+            Participants participants = new Participants();
+            participants.setName(respParticipants);
+
+            for (Question questionParticipant: party.getQuestions()) {
+                System.out.println("Resposta para a pergunta '" + (questionParticipant.getText()) + "': ");
                 String answer = response.next();
 
-                participants.addAnswer(question, answer);
+
+                participants.addAnswer(questionParticipant, answer);
             }
 
             party.addParticipant(participants);
             numParticipants++;
         }while(true);
     }
- /*
+
     public void Profile() {
+        for (Participants participant : party.getParticipants()) {
+            System.out.println("Nome: " + participant.getName());
 
-        System.out.println("-----Festas Disponiveis-----");
-        //Party festas = new Party();
-        //for pegando festa com length
-        //list_questions_party.add(festas);
+            System.out.println("---- Perguntas Respondidas ----");
+            for (Question question : party.getQuestions()) {
+                String resp = participant.getAnswer(question);
+                System.out.println("- Pergunta: " + question.getText());
+                System.out.println("  Resposta: " + resp);
+            }
 
-            System.out.println("[1] ");
-            System.out.println("[2] ");
-            System.out.println("[3] ");
-
-
-        System.out.println("Qual festa voce quer entrar? ");
-
-        char control = 's';
-
-        do {
-           // Participants part = new Participants();
-            //list_participants.add(part);
-
-            System.out.print("Quer adicionar outra pessoa? (s/n): ");
-            control = response.next().charAt(0);
-        }while(control == 's' || control == 'S');
-
-        for(Participants i : list_participants) {
-            System.out.println(i);
+            System.out.println();
         }
     }
 
-  */
+    public void Result() {
+        for (Participants participante : party.getParticipants()) {
+            Participants match = party.findMatch(participante);
+            System.out.println("Match para " + participante.getName() + ": " + match.getName());
+        }
+    }
 }

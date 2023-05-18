@@ -13,9 +13,7 @@ public class Participants {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Map<Question, String> getAnswers_list() {
-		return answers_list;
-	}
+
 	public void addAnswer(Question question, String answer){
 		answers_list.put(question, answer);
 	}
