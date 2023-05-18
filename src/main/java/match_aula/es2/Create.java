@@ -24,7 +24,6 @@ public class Create {
 
             if (textAnswer.equals("0")) break;
 
-
             Question question = new Question();
             question.setText(textAnswer);
 
@@ -34,6 +33,7 @@ public class Create {
     }
 
     public void Assign_participants() {
+
         System.out.println("\n--- Cadastrar Participantes ---");
         int numParticipants=0;
         do {
@@ -48,7 +48,6 @@ public class Create {
             for (Question questionParticipant: party.getQuestions()) {
                 System.out.println("Resposta para a pergunta '" + (questionParticipant.getText()) + "': ");
                 String answer = response.next();
-
 
                 participants.addAnswer(questionParticipant, answer);
             }
@@ -74,6 +73,10 @@ public class Create {
     }
 
     public void Result() {
+
+        System.out.println("Nome da Festa: " + party.getNameParty());
+        System.out.println("Descrição da Festa: " + party.getDescription());
+
         for (Participants participante : party.getParticipants()) {
             Participants match = party.findMatch(participante);
             System.out.println("Match para " + participante.getName() + ": " + match.getName());

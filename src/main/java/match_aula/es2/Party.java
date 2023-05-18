@@ -12,10 +12,15 @@ public class Party {
 		this.participants = new ArrayList<>();
 	}
 
+	public String getNameParty() {
+		return nameParty;
+	}
 	public void setNameParty(String nameParty) {
 		this.nameParty = nameParty;
 	}
-
+	public String getDescription() {
+		return description;
+	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
